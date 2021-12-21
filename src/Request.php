@@ -5,7 +5,7 @@ namespace Firemobile;
 use Laravie\Codex\Common\Response;
 use Psr\Http\Message\ResponseInterface;
 
-class Request
+abstract class Request
 {
     /**
      * Resolve the responder class.
@@ -13,7 +13,7 @@ class Request
      * @param  \Psr\Http\Message\ResponseInterface $message
      * @return \Laravie\Codex\Contracts\Response
      */
-    protected function responseWith(ResponseInterface $message): Contracts\Response
+    protected function responseWith(ResponseInterface $message)
     {
         return new Response($message);
     }
@@ -60,5 +60,5 @@ class Request
         return array_merge($this->getApiBody(), $body);
     }
 
-    abstract function send();
+    abstract public function send();
 }

@@ -2,6 +2,8 @@
 
 namespace Firemobile;
 
+use Psr\Http\Client\ClientInterface;
+
 class Client
 {
 
@@ -16,10 +18,15 @@ class Client
     protected $config = [];
 
     /**
+     * @var mixed
+     */
+    protected $endpoint = 'https://demo.firemobile.co/cgi-bin';
+
+    /**
      * @param $httpClient
      * @param $config
      */
-    public function __construct($httpClient, array $config)
+    public function __construct(ClientInterface $httpClient, array $config)
     {
         $this->httpClient = $httpClient;
         $this->config = $config;
@@ -29,7 +36,7 @@ class Client
      * @param $httpClient
      * @param array         $config
      */
-    public function make($httpClient, array $config)
+    public static function make(ClientInterface $httpClient, array $config): self
     {
         return new self($httpClient, $config);
     }
@@ -37,7 +44,15 @@ class Client
     /**
      * @return mixed
      */
-    public function config()
+    public function endpoint(): string
+    {
+        return array_key_exists('endpoint', $this->config()) ? $this->config()['endpoint'] : $this->endpoint;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function config(): array
     {
         return $this->config;
     }
@@ -45,7 +60,7 @@ class Client
     /**
      * @return mixed
      */
-    public function httpClient()
+    public function httpClient(): ClientInterface
     {
         return $this->httpClient;
     }

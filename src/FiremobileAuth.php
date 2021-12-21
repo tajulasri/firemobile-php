@@ -23,12 +23,12 @@ class FiremobileAuth implements Authenticable
     /**
      * @param $config
      */
-    public static function make(Client $client)
+    public static function make(Client $client): self
     {
         return new self($client);
     }
 
-    public function credentials()
+    public function credentials(): array
     {
         return [
             'gw-username' => $this->client->config()['username'],
@@ -39,7 +39,7 @@ class FiremobileAuth implements Authenticable
     /**
      * @return mixed
      */
-    public function client()
+    public function client(): Client
     {
         return $this->client;
     }

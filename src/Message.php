@@ -18,7 +18,7 @@ class Message
      */
     protected $text;
 
-    public static function make()
+    public static function make(): self
     {
         return new self;
     }
@@ -27,7 +27,7 @@ class Message
      * @param  $from
      * @return mixed
      */
-    public function setFrom($from)
+    public function setFrom(string $from)
     {
         $this->from = $from;
         return $this;
@@ -37,7 +37,7 @@ class Message
      * @param  $from
      * @return mixed
      */
-    public function setTo($to)
+    public function setTo(string $to)
     {
         $this->to = $to;
         return $this;
@@ -47,7 +47,7 @@ class Message
      * @param  $from
      * @return mixed
      */
-    public function setText($text)
+    public function setText(string $text)
     {
         $this->text = $text;
         return $this;
@@ -56,7 +56,7 @@ class Message
     /**
      * @return mixed
      */
-    public function from()
+    public function from(): string
     {
         return $this->from;
     }
@@ -64,7 +64,7 @@ class Message
     /**
      * @return mixed
      */
-    public function to()
+    public function to(): string
     {
         return $this->to;
     }
@@ -72,12 +72,12 @@ class Message
     /**
      * @return mixed
      */
-    public function text()
+    public function text(): string
     {
         return $this->text;
     }
 
-    public function message()
+    public function message(): array
     {
         return [
             'gw-from' => $this->from(),

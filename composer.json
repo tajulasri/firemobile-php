@@ -18,6 +18,11 @@
       "Firemobile\\": "src/"
     }
   },
+    "autoload-dev": {
+        "psr-4": {
+            "Firemobile\\Tests\\": "tests"
+        }
+    },
   "require": {
     "php": "^7.2 || ^8.0",
     "laravie/codex": "^5.1",
@@ -38,7 +43,7 @@
   },
   "scripts": {
     "test": [
-      "./vendor/bin/phpunit"
+      "./vendor/bin/phpunit -c ./"
     ]
   },
   "config": {
