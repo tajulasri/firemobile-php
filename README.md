@@ -1,4 +1,5 @@
-# Very short description of the package
+## Firemobile PHP 
+[![tests](https://github.com/tajulasri/firemobile-php/actions/workflows/tests.yml/badge.svg)](https://github.com/tajulasri/firemobile-php/actions/workflows/tests.yml)
 
 This package is for sending SMS via Firemobile service providers.
 
@@ -8,7 +9,7 @@ You can install the package via composer:
 
 ```bash
 
-composer require espressobyte/firemobile-php
+composer require espressobyte/firemobile-php 
 
 ```
 
