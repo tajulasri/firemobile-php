@@ -23,6 +23,16 @@ class Client
     protected $endpoint = 'https://demo.firemobile.co/cgi-bin';
 
     /**
+     * @var mixed
+     */
+    protected $receivedCallback = false;
+
+    /**
+     * @var mixed
+     */
+    protected $callbackurl = null;
+
+    /**
      * @param $httpClient
      * @param $config
      */
@@ -47,6 +57,50 @@ class Client
     public function endpoint(): string
     {
         return array_key_exists('endpoint', $this->config()) ? $this->config()['endpoint'] : $this->endpoint;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function callback($url): self
+    {
+
+        $this->handleReceivedCallback($url);
+        $this->callbackurl = $url;
+
+        $param = [
+            'gw-dlr-mask' => $this->receivedCallback(),
+            'gw-dlr-url'  => $this->callbackurl(),
+        ];
+
+        $this->config = array_merge($this->config(), $param);
+
+        return $this;
+    }
+
+    /**
+     * @param  $url
+     * @return mixed
+     */
+    private function handleReceivedCallback($url)
+    {
+        return $this->receivedCallback = ($url == null ? false : true);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function receivedCallback()
+    {
+        return $this->receivedCallback;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function callbackurl()
+    {
+        return $this->callbackurl;
     }
 
     /**

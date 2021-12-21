@@ -11,7 +11,7 @@ use Psr\Http\Client\ClientInterface;
 
 class SmsTest extends TestCase
 {
-    public function test_send_sms_via_instance()
+    public function test_send_sms_via_instance_response_success()
     {
 
         $endpoint = 'https://endpoint.test';
@@ -24,16 +24,24 @@ class SmsTest extends TestCase
             'password' => $data,
         ];
 
-        $client = new Client($this->httpClientMock(), $config);
+        $client = Client::make($this->successSmsSendMock(), $config)
+            ->callback($endpoint);
+
         $message = Message::make()
             ->setFrom($data)
             ->setTo($data)
             ->setText($data);
 
         $sendSms = Sms::make($message, FiremobileAuth::make($client))->send();
+        $response = [];
+
+        parse_str($sendSms->getBody(), $response);
 
         $this->assertInstanceOf('Firemobile\Client', $client);
-        $this->assertEquals($config, $client->config());
+        $this->assertEquals(array_merge(['gw-dlr-url' => $endpoint, 'gw-dlr-mask' => true], $config), $client->config());
+        $this->assertEquals(200, $sendSms->getStatusCode());
+        $this->assertEquals(0, $response['status']);
+        $this->assertEquals($this->getTestMsgId(), $response['msgid']);
 
     }
 
