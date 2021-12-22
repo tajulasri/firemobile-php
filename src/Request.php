@@ -10,7 +10,6 @@ abstract class Request
     /**
      * Resolve the responder class.
      *
-     * @param  \Psr\Http\Message\ResponseInterface $message
      * @return \Laravie\Codex\Contracts\Response
      */
     protected function responseWith(ResponseInterface $message)
@@ -30,8 +29,6 @@ abstract class Request
 
     /**
      * Get API Body.
-     *
-     * @return array
      */
     protected function getApiBody(): array
     {
@@ -41,7 +38,8 @@ abstract class Request
     /**
      * Merge API Headers.
      *
-     * @param  array<string, mixed>   $headers
+     * @param array<string, mixed> $headers
+     *
      * @return array<string, mixed>
      */
     final protected function mergeApiHeaders(array $headers = []): array
@@ -51,9 +49,6 @@ abstract class Request
 
     /**
      * Merge API Body.
-     *
-     * @param  array   $body
-     * @return array
      */
     final protected function mergeApiBody(array $body = []): array
     {

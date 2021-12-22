@@ -21,6 +21,7 @@ composer require espressobyte/firemobile-php
 use Firemobile\Client;
 use Firemobile\FiremobileAuth;
 use Firemobile\Message;
+use Firemobile\Requests\Sms;
 use GuzzleHttp\Client as HttpClient;
 
 $message = Message::make()
@@ -49,6 +50,7 @@ echo $response->getBody();
 use Firemobile\Client;
 use Firemobile\FiremobileAuth;
 use Firemobile\Message;
+use Firemobile\Requests\Sms;
 use GuzzleHttp\Client as HttpClient;
 
 $callbackUrl = 'https://demo.test/callback';

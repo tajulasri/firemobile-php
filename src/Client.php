@@ -6,7 +6,6 @@ use Psr\Http\Client\ClientInterface;
 
 class Client
 {
-
     /**
      * @var mixed
      */
@@ -44,7 +43,6 @@ class Client
 
     /**
      * @param $httpClient
-     * @param array         $config
      */
     public static function make(ClientInterface $httpClient, array $config): self
     {
@@ -64,27 +62,23 @@ class Client
      */
     public function callback($url): self
     {
-
         $this->handleReceivedCallback($url);
+
         $this->callbackurl = $url;
 
-        $param = [
-            'gw-dlr-mask' => $this->receivedCallback(),
-            'gw-dlr-url'  => $this->callbackurl(),
-        ];
-
-        $this->config = array_merge($this->config(), $param);
+        $this->config = array_merge($this->config(), $this->callbackBody());
 
         return $this;
     }
 
     /**
-     * @param  $url
+     * @param $url
+     *
      * @return mixed
      */
     private function handleReceivedCallback($url)
     {
-        return $this->receivedCallback = ($url == null ? false : true);
+        return $this->receivedCallback = $url == null ? 0 : 1;
     }
 
     /**
@@ -101,6 +95,14 @@ class Client
     public function callbackurl()
     {
         return $this->callbackurl;
+    }
+
+    public function callbackBody()
+    {
+        return [
+            'Gw-Dlr-Mask' => $this->receivedCallback(),
+            'Gw-Dlr-Url'  => $this->callbackurl(),
+        ];
     }
 
     /**

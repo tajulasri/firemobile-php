@@ -1,10 +1,11 @@
 <?php
+
 namespace Firemobile\Tests;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase as PHPUnit;
@@ -35,7 +36,6 @@ class TestCase extends PHPUnit
         $client = new Client(['handler' => $handlerStack]);
 
         return $client;
-
     }
 
     protected function getTestMsgId(): string

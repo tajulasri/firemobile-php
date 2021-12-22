@@ -4,5 +4,4 @@ namespace Firemobile;
 
 class Response
 {
-
 }

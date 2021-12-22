@@ -4,12 +4,11 @@ namespace Tests;
 
 use Firemobile\Client;
 use Firemobile\FiremobileAuth;
-use Firemobile\Message;
 use Firemobile\Tests\TestCase;
 
 class FiremobileAuthTest extends TestCase
 {
-    public function test_it_instantiate_class()
+    public function testItInstantiateClass()
     {
         $instance = new FiremobileAuth(Client::make($this->httpClientMock(), []));
         $viaStatic = FiremobileAuth::make(Client::make($this->httpClientMock(), []));
@@ -18,7 +17,7 @@ class FiremobileAuthTest extends TestCase
         $this->assertInstanceOf('Firemobile\FiremobileAuth', $viaStatic);
     }
 
-    public function test_it_return_correct_credentials()
+    public function testItReturnCorrectCredentials()
     {
         $data = 'test';
 
@@ -27,9 +26,7 @@ class FiremobileAuthTest extends TestCase
             'password' => $data,
         ]));
 
-        $this->assertEquals(['gw-username' => $data, 'gw-password' => $data], $auth->credentials());
+        $this->assertEquals(['Gw-Username' => $data, 'Gw-Password' => $data], $auth->credentials());
         $this->assertInstanceOf('Firemobile\Client', $auth->client());
-
     }
-
 }

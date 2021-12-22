@@ -7,13 +7,11 @@ use Firemobile\FiremobileAuth;
 use Firemobile\Message;
 use Firemobile\Requests\Sms;
 use Firemobile\Tests\TestCase;
-use Psr\Http\Client\ClientInterface;
 
 class SmsTest extends TestCase
 {
-    public function test_send_sms_via_instance_response_success()
+    public function testSendSmsViaInstanceResponseSuccess()
     {
-
         $endpoint = 'https://endpoint.test';
 
         $data = 'secret';
@@ -38,11 +36,9 @@ class SmsTest extends TestCase
         parse_str($sendSms->getBody(), $response);
 
         $this->assertInstanceOf('Firemobile\Client', $client);
-        $this->assertEquals(array_merge(['gw-dlr-url' => $endpoint, 'gw-dlr-mask' => true], $config), $client->config());
+        $this->assertEquals(array_merge(['Gw-Dlr-Url' => $endpoint, 'Gw-Dlr-Mask' => 1], $config), $client->config());
         $this->assertEquals(200, $sendSms->getStatusCode());
         $this->assertEquals(0, $response['status']);
         $this->assertEquals($this->getTestMsgId(), $response['msgid']);
-
     }
-
 }

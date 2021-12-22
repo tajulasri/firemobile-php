@@ -2,7 +2,6 @@
 
 namespace Firemobile;
 
-use Firemobile\Client;
 use Firemobile\Contracts\Authenticable;
 
 class FiremobileAuth implements Authenticable
@@ -31,8 +30,8 @@ class FiremobileAuth implements Authenticable
     public function credentials(): array
     {
         return [
-            'gw-username' => $this->client->config()['username'],
-            'gw-password' => $this->client->config()['password'],
+            'Gw-Username' => $this->client->config()['username'],
+            'Gw-Password' => $this->client->config()['password'],
         ];
     }
 

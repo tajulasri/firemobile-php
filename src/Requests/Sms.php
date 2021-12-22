@@ -1,4 +1,5 @@
 <?php
+
 namespace Firemobile\Requests;
 
 use Firemobile\Contracts\Authenticable;
@@ -17,19 +18,12 @@ class Sms extends Request
      */
     protected $message;
 
-    /**
-     * @param Authenticable $auth
-     */
     public function __construct(Message $message, Authenticable $auth)
     {
         $this->auth = $auth;
         $this->message = $message;
     }
 
-    /**
-     * @param Message       $message
-     * @param Authenticable $auth
-     */
     public static function make(Message $message, Authenticable $auth)
     {
         return new self($message, $auth);
@@ -42,9 +36,17 @@ class Sms extends Request
     {
         $endpoint = $this->auth->client()->endpoint();
 
+        $body = $this->mergeApiBody(
+            array_merge(
+                $this->auth->credentials(),
+                $this->message->message(),
+                $this->auth->client()->callbackBody()
+            )
+        );
+
         $response = $this->auth->client()->httpClient()
             ->post($endpoint.'/sendsms', [
-                'form_params' => $this->mergeApiBody($this->auth->credentials(), $this->message->message()),
+                'form_params' => $body,
             ]);
 
         return $this->responseWith($response);

@@ -1,4 +1,5 @@
 <?php
+
 namespace Firemobile;
 
 class Message
@@ -20,36 +21,42 @@ class Message
 
     public static function make(): self
     {
-        return new self;
+        return new self();
     }
 
     /**
-     * @param  $from
+     * @param $from
+     *
      * @return mixed
      */
     public function setFrom(string $from)
     {
         $this->from = $from;
+
         return $this;
     }
 
     /**
-     * @param  $from
+     * @param $from
+     *
      * @return mixed
      */
     public function setTo(string $to)
     {
         $this->to = $to;
+
         return $this;
     }
 
     /**
-     * @param  $from
+     * @param $from
+     *
      * @return mixed
      */
     public function setText(string $text)
     {
         $this->text = $text;
+
         return $this;
     }
 
@@ -77,12 +84,15 @@ class Message
         return $this->text;
     }
 
+    /**
+     * @return mixed
+     */
     public function message(): array
     {
         return [
-            'gw-from' => $this->from(),
-            'gw-to'   => $this->to(),
-            'gw-text' => $this->text(),
+            'Gw-From' => $this->from(),
+            'Gw-To'   => $this->to(),
+            'Gw-Text' => $this->text(),
         ];
     }
 }

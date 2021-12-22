@@ -3,23 +3,20 @@
 namespace Firemobile\Tests;
 
 use Firemobile\Client;
-use Firemobile\Message;
-use Firemobile\Tests\TestCase;
 use Psr\Http\Client\ClientInterface;
 
 class ClientTest extends TestCase
 {
-    public function test_it_instantiate_message()
+    public function testItInstantiateMessage()
     {
-
         $endpoint = 'https://endpoint.test';
 
         $client = new Client($this->httpClientMock(), ['endpoint' => $endpoint]);
         $viaStatic = Client::make($this->httpClientMock(), ['endpoint' => $endpoint]);
 
         $callback = [
-            'gw-dlr-mask' => true,
-            'gw-dlr-url'  => $endpoint,
+            'Gw-Dlr-Mask' => true,
+            'Gw-Dlr-Url'  => $endpoint,
         ];
 
         $this->assertInstanceOf('Firemobile\Client', $client);
@@ -34,5 +31,4 @@ class ClientTest extends TestCase
         $this->assertEquals($client->receivedCallback(), true);
         $this->assertEquals(array_merge(['endpoint' => $endpoint], $callback), $client->config());
     }
-
 }
