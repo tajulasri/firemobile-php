@@ -8,12 +8,10 @@ This package is for sending SMS via Firemobile service providers.
 You can install the package via composer:
 
 ```bash
-
 composer require espressobyte/firemobile-php 
-
 ```
 
-## Usage without set option for delivery report callback
+### Usage without set option for delivery report callback
 
 ```php
 <?php 
@@ -42,7 +40,7 @@ echo $response->getBody();
 
 ```
 
-## Usage with option for delivery report received
+### Usage with option for delivery report received
 
 ```php
 <?php 
@@ -78,9 +76,7 @@ echo $response->getBody();
 ### Testing
 
 ```bash
-
 composer test
-
 ```
 
 ### Changelog
